@@ -11,9 +11,9 @@ OOP (interfaces, generics, methods, encapsulation), implemented in C using clang
 
 I don't know if anyone has done this, but it's pretty simple.
 Clang's blocks (also known as closures) can be used as members to a struct.
-That struct is an interface, and classes can be implemented by creating functions
+That struct can be an interface, and classes can be implemented by creating functions
 that return instances of that struct. These functions can create private variables, which
-can be accessed by the blocks. This allows for public/private variables (encapsulation),
+can only be accessed by the blocks. This allows for public/private variables (encapsulation),
 proper method call syntax (obect.verb()), interfaces, and classes. Generics can also be
 implemented using macros, which take in a type as one of their arguments and create a new
 interface that uses that type (rather than void \*), and child classes (functions) that also
