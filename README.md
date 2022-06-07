@@ -23,5 +23,5 @@ implement them, also using a macro.
 
 ## DISCLAIMER
 I have run some simple benchmarks, and my vector.h, implemented using closures, is
-approxiamately 2-3 times slower than a traditional, C-style approach. If you want
-to use OOP, just use C++.
+approximately 2-3 times slower than a traditional, C-style approach (without closures).
+If you want to use OOP, just use C++.
