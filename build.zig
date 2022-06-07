@@ -9,6 +9,7 @@ const flags = [_][]const u8{
     "-pedantic",
     "-pedantic-errors",
     "-Werror",
+    "-Iinclude/",
     "-fblocks",
     "-O3",
 };
