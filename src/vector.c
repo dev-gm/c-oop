@@ -1,8 +1,6 @@
 #include <vector.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h> // TAKE THIS OUT
-#include <Block.h>
 
 #define IMPL_VECTOR(type) \
 	vector_ ## type vector_ ## type ## _new(size_t capacity_increase) { \
