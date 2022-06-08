@@ -7,8 +7,9 @@ OOP (interfaces, generics, methods, encapsulation, RAII, etc), implemented in C 
 - libblocksruntime-dev
 
 ## Constructs implemented:
-- \[Y] vector.h (vector_(type) with push/pop/insert/remove/begin/end/free functions and \__attribute__((cleanup)) defer support)
+- \[Y] vector.h (vector_(type) with push/pop/insert/remove/begin/end/free methods and RAII support)
 - \[Y] iterate.h (foreach and foreach_reversed macros for iterators)
+- \[Y] mutex.h (mutex_(type) with lock/unlock/free methods and RAII support)
 
 I don't know if anyone has done this, but it's pretty simple.
 Clang's blocks (also known as closures) can be used as members to a struct.
@@ -21,7 +22,7 @@ interface that uses that type (rather than void \*), and child classes (function
 use that generic type. Unfortunately, C doesn't support interchangeable use of identical
 anonymous structs, so you must declare the specific types that you want to use as generics
 with macros, and then implement them, also using a macro. \__attribute__((cleanup)) can be
-used for RAII/defer.
+used for RAII.
 
 ## DISCLAIMER
 I have run some simple benchmarks, and my vector.h, implemented using closures, is
