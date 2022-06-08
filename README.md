@@ -1,5 +1,5 @@
 # c-oop
-OOP (interfaces, generics, methods, encapsulation), implemented in C using clang's blocks (-fblocks)
+OOP (interfaces, generics, methods, encapsulation, RAII, etc), implemented in C using clang's blocks (-fblocks)
 
 ## Prerequisites:
 - zig
@@ -20,7 +20,8 @@ implemented using macros, which take in a type as one of their arguments and cre
 interface that uses that type (rather than void \*), and child classes (functions) that also
 use that generic type. Unfortunately, C doesn't support interchangeable use of identical
 anonymous structs, so you must declare the specific types that you want to use as generics
-with macros, and then implement them, also using a macro.
+with macros, and then implement them, also using a macro. \__attribute__((cleanup)) can be
+used for RAII/defer.
 
 ## DISCLAIMER
 I have run some simple benchmarks, and my vector.h, implemented using closures, is
