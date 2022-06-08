@@ -7,7 +7,8 @@ OOP (interfaces, generics, methods, encapsulation), implemented in C using clang
 - libblocksruntime-dev
 
 ## Constructs implemented:
-- \[Y] vector.h
+- \[Y] vector.h (vector_(type) with push/pop/insert/remove/begin/end/free functions and \__attribute__((cleanup)) defer support)
+- \[Y] iterate.h (foreach and foreach_reversed macros for iterators)
 
 I don't know if anyone has done this, but it's pretty simple.
 Clang's blocks (also known as closures) can be used as members to a struct.
