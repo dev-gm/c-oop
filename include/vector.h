@@ -8,7 +8,7 @@
 #include <string.h>
 
 #define DEF_VECTOR(type) \
-	__attribute__((cleanup(vector_ ## type ## _free))) vector_ ## type
+	__attribute__((cleanup(_vector_ ## type ## _free))) vector_ ## type
 
 #define DECL_VECTOR(type) \
 	typedef struct { \
@@ -23,7 +23,7 @@
 		void (^free)(void); \
 	} vector_ ## type; \
 	vector_ ## type vector_ ## type ## _new(size_t capacity_increase); \
-	void vector_ ## type ## _free(vector_ ## type *self);
+	void _vector_ ## type ## _free(vector_ ## type *self);
 
 #define IMPL_VECTOR(type) \
 	vector_ ## type vector_ ## type ## _new(size_t capacity_increase) { \
@@ -99,7 +99,7 @@
 		}); \
 		return public; \
 	} \
-	void vector_ ## type ## _free(vector_ ## type *self) { \
+	void _vector_ ## type ## _free(vector_ ## type *self) { \
 		self->free(); \
 	}
 

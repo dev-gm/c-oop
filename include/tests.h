@@ -17,9 +17,17 @@ void run_vector_tests();
 
 void run_iterate_tests();
 
+#include <mutex.h>
+
+DECL_MUTEX(int)
+DECL_MUTEX(double)
+
+void run_mutex_tests();
+
 inline void run_tests() {
 	run_vector_tests();
 	run_iterate_tests();
+	run_mutex_tests();
 }
 
 #endif

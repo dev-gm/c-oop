@@ -1,5 +1,11 @@
 #include <tests.h>
 
+#define TEST(func) \
+	printf("test_%s: %s\n", #func, test_ ## func() ? "ok" : "fail")
+
+#define TEST_ARGS(func, ...) \
+	printf("test_%s: %s\n", #func, test_ ## func(__VA_ARGS__) ? "ok" : "fail")
+
 // VECTOR
 
 IMPL_VECTOR(int)
@@ -40,13 +46,10 @@ VECTOR_TEST(double)
 VECTOR_TEST(vector_double)
 
 void run_vector_tests() {
-	printf("test_vector_int: %s\n",
-		test_vector_int(1122334455) ? "ok" : "fail");
-	printf("test_vector_double: %s\n",
-		test_vector_double(554433.221101) ? "ok" : "fail");
+	TEST_ARGS(vector_int, 1122334455);
+	TEST_ARGS(vector_double, 554433.221101);
 	DEF_VECTOR(double) test_vector = vector_double_new(0);
-	printf("test_vector_vector_double: %s\n",
-		test_vector_vector_double(test_vector) ? "ok" : "fail");
+	TEST_ARGS(vector_vector_double, test_vector);
 }
 
 // ITERATE
@@ -74,8 +77,40 @@ bool test_foreach_reversed_vector() {
 }
 
 void run_iterate_tests() {
-	printf("test_foreach_vector: %s\n",
-		test_foreach_vector() ? "ok": "fail");
-	printf("test_foreach_reversed_vector: %s\n",
-		test_foreach_reversed_vector() ? "ok": "fail");
+	TEST(foreach_vector);
+	TEST(foreach_reversed_vector);
 }
+
+// MUTEX
+
+IMPL_MUTEX(int)
+IMPL_MUTEX(double)
+
+#define MUTEX_TEST(type) \
+	bool test_mutex_ ## type(type value, type new) { \
+		DEF_MUTEX(type) mutex = mutex_ ## type ## _new(value); \
+		{ \
+			DEF_MUTEX_GUARD(type) guard = mutex.lock(); \
+			if (*guard != value) \
+				return false; \
+			*guard = new; \
+		} \
+		{ \
+			type *guard = mutex.lock(); \
+			if (*guard != new) \
+				return false; \
+			*guard = value; \
+			mutex.unlock(); \
+		} \
+		DEF_MUTEX_GUARD(type) guard = mutex.lock(); \
+		return *guard == value; \
+	}
+
+MUTEX_TEST(int)
+MUTEX_TEST(double)
+
+void run_mutex_tests() {
+	TEST_ARGS(mutex_int, 1234567, 123);
+	TEST_ARGS(mutex_double, 76543.212, 27.25);
+}
+
